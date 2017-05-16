@@ -11,7 +11,7 @@ module.exports = function(controller) {
 
         people = ['dex', 'dmitriy', 'ethan', 'graysonnull', 'shailie', 'winston'];
         tuesday = nearestTuesday();
-        name = people[tuesday.daysSinceWinston % people.length];
+        name = people[tuesday.weeksSinceWinston % people.length];
         if (tuesday.daysTilDonuts == 0) {
             bot.reply(message, '@' + name + ' is supposed to bring donuts today!');
         } else {
@@ -33,7 +33,7 @@ function nearestTuesday() {
     diffDays = nextDonutDay.date() - now.date();
 
     return {
-        daysSinceWinston: Math.abs(moment("10-17-2016", "MM-DD-YYYY").diff(nextDonutDay, 'days')),
+        weekSinceWinston: Math.abs(moment("10-17-2016", "MM-DD-YYYY").diff(nextDonutDay, 'weeks')),
         daysTilDonuts: diffDays,
-    };
-}
+    }
+};
