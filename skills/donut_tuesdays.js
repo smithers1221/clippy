@@ -22,7 +22,7 @@ module.exports = function(controller) {
 
 function nearestTuesday() {
     var moment = require('moment');
-    var now = moment("05-23-2017", "MM-DD-YYYY");
+    var now = moment();
 
     if(now.weekday() <= 2) {
         nextDonutDay = now.clone().isoWeekday("Tuesday");
