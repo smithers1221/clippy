@@ -17,12 +17,9 @@ module.exports = function(controller) {
             , access_token:         process.env.ACCESS_TOKEN
             , access_token_secret:  process.env.ACCESS_TOKEN_SECRET
         })
-        
-        console.log(moment().format("YYYY-MM-DD"))
             T.get('statuses/user_timeline', { count:20, since_id: moment().format("YYYY-MM-DD"), trim_user: true, exclude_replies: true, user_id: 2295568387 }, function(err, data, response) {
                 for (var i = 0; i < data.length; i++) {
                     if ((data[i].text.indexOf('@bLAckwelder_LA') != -1) && (data[i].text.indexOf(moment().format('ddd').toUpperCase()) != -1)) {
-                        console.log("RETURNED DATA: " + data[i].text)
                         bot.reply(message, 'Hello, today\'s food truck tweet is: ' + data[i].text);
                     }
                 }
