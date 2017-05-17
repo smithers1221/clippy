@@ -9,7 +9,7 @@ module.exports = function(controller) {
 
     controller.hears(['donut', 'doughnut'], 'direct_message,direct_mention,mention', function(bot, message) {
 
-        people = ['dex', 'dmitriy', 'ethan', 'graysonnull', 'shailie', 'winston'];
+        people = ['dmitriy', 'ethan', 'graysonnull', 'shailie', 'winston', 'dex'];
         tuesday = nearestTuesday();
         name = people[tuesday.weeksSinceWinston % people.length];
         if (tuesday.daysTilDonuts == 0) {
@@ -22,7 +22,7 @@ module.exports = function(controller) {
 
 function nearestTuesday() {
     var moment = require('moment');
-    var now = moment();
+    var now = moment("05-23-2017", "MM-DD-YYYY");
 
     if(now.weekday() <= 2) {
         nextDonutDay = now.clone().isoWeekday("Tuesday");
@@ -33,7 +33,7 @@ function nearestTuesday() {
     diffDays = nextDonutDay.date() - now.date();
 
     return {
-        weekSinceWinston: Math.abs(moment("10-17-2016", "MM-DD-YYYY").diff(nextDonutDay, 'weeks')),
+        weeksSinceWinston: Math.abs(moment("10-17-2016", "MM-DD-YYYY").diff(nextDonutDay, 'weeks')),
         daysTilDonuts: diffDays,
     }
 };

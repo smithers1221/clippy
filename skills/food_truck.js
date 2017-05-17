@@ -10,18 +10,20 @@ module.exports = function(controller) {
 
         controller.storage.users.get(message.user, function(err, user) {
             var Twit = require('twit');
+            var moment = require('moment');
             var T = new Twit({
             consumer_key:         process.env.CONSUMER_KEY
             , consumer_secret:      process.env.CONSUMER_SECRET
             , access_token:         process.env.ACCESS_TOKEN
             , access_token_secret:  process.env.ACCESS_TOKEN_SECRET
-            })
-            T.get('statuses/user_timeline', { count:20, since_id: todaysDate(), trim_user: true, exclude_replies: true, user_id: 2295568387 }, function(err, data, response) {
+        })
+        
+        console.log(moment().format("YYYY-MM-DD"))
+            T.get('statuses/user_timeline', { count:20, since_id: moment().format("YYYY-MM-DD"), trim_user: true, exclude_replies: true, user_id: 2295568387 }, function(err, data, response) {
                 for (var i = 0; i < data.length; i++) {
-                    if (data[i].text.indexOf('@bLAckwelder_LA') != -1){
+                    if ((data[i].text.indexOf('@bLAckwelder_LA') != -1) && (data[i].text.indexOf(moment().format('ddd').toUpperCase()) != -1)) {
+                        console.log("RETURNED DATA: " + data[i].text)
                         bot.reply(message, 'Hello, today\'s food truck tweet is: ' + data[i].text);
-                    } else {
-                        bot.reply(message, 'Sorry! Don\'t know what the food truck is today, so better start walking!');
                     }
                 }
             })
