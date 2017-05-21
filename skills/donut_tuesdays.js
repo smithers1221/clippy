@@ -7,7 +7,7 @@ Contributed by: https://github.com/divolgin
 
 module.exports = function(controller) {
 
-    controller.hears(['donut', 'doughnut'], 'direct_message,direct_mention,mention', function(bot, message) {
+    controller.hears(['^(?!.*add).*donut.*', '^(?!.*add).*doughnut.*'], 'direct_message,direct_mention,mention', function(bot, message) {
 
         people = ['dmitriy', 'ethan', 'graysonnull', 'shailie', 'winston', 'dex'];
         tuesday = nearestTuesday();
