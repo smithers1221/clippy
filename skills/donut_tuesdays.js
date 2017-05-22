@@ -7,7 +7,7 @@ Contributed by: https://github.com/divolgin
 
 module.exports = function(controller) {
 
-    controller.hears(['donut', 'doughnut'], 'direct_message,direct_mention,mention', function(bot, message) {
+    controller.hears(['^(?!.*add).*donut.*', '^(?!.*add).*doughnut.*'], 'direct_message,direct_mention,mention', function(bot, message) {
 
         people = ['dmitriy', 'ethan', 'graysonnull', 'shailie', 'winston', 'dex'];
         tuesday = nearestTuesday();
@@ -22,18 +22,18 @@ module.exports = function(controller) {
 
 function nearestTuesday() {
     var moment = require('moment');
-    var now = moment();
+    var now = moment().utcOffset(-8);
 
     if(now.weekday() <= 2) {
-        nextDonutDay = now.clone().isoWeekday("Tuesday");
+        nextDonutDay = now.clone().weekday(2);
     } else {
-        nextDonutDay = now.clone().add(1, 'week').isoWeekday("Tuesday");
+        nextDonutDay = now.clone().add(1, 'week').weekday(2);
     }
 
-    diffDays = nextDonutDay.date() - now.date();
+    diffDays = now.diff(nextDonutDay, 'days');
 
     return {
-        weeksSinceWinston: Math.abs(moment("10-17-2016", "MM-DD-YYYY").diff(nextDonutDay, 'weeks')),
-        daysTilDonuts: diffDays,
+        weeksSinceWinston: Math.abs(moment("10-17-2016", "MM-DD-YYYY").utcOffset(-8).diff(nextDonutDay, 'weeks')),
+        daysTilDonuts: Math.abs(diffDays),
     }
 };
