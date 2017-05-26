@@ -18,10 +18,18 @@ module.exports = function(controller) {
             , access_token_secret:  process.env.ACCESS_TOKEN_SECRET
         })
             T.get('statuses/user_timeline', { count:30, since_id: moment().format("YYYY-MM-DD"), trim_user: true, exclude_replies: true, user_id: 2295568387 }, function(err, data, response) {
+                var found = false;
                 for (var i = 0; i < data.length; i++) {
                     if ((data[i].text.indexOf('@bLAckwelder_LA') != -1) && (data[i].text.indexOf(moment().format('ddd').toUpperCase()) != -1)) {
                         bot.reply(message, 'Hello, today\'s food truck tweet is: ' + data[i].text);
+                        found = true;
+                    } else if ((data[i].text.indexOf('@bLAckwelder_LA') != -1) && (data[i].text.indexOf('2DAY') != -1)) {
+                        bot.reply(message, 'Hello, today\'s food truck tweet is: ' + data[i].text);
+                        found = true;
                     }
+                }
+                if (!found) {
+                    bot.reply(message, 'I\'m sorry, I couldn\'t find the food truck tweet!')
                 }
             })
         });
