@@ -68,6 +68,11 @@ module.exports = function(controller) {
         bot.reply(message,'WAIT!');
     });
 
+    controller.hears(['dex'],['direct_message,direct_mention,mention'], function(bot, message) {
+
+        bot.reply(message,':mouse::dash:');
+    });
+
     controller.hears('winston',['direct_message,direct_mention,mention'], function(bot, message) {
 
         bot.reply(message,':heart_eyes:');
