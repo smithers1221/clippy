@@ -9,9 +9,10 @@ module.exports = function(controller) {
 
     controller.hears(['^(?!.*add).*donut.*', '^(?!.*add).*doughnut.*'], 'direct_message,direct_mention,mention', function(bot, message) {
 
-        people = ['dmitriy', 'ethan', 'graysonnull', 'shailie', 'winston', 'dex'];
+        people = ['dex', 'dmitriy', 'ethan', 'graysonnull', 'shailie', 'sloane.e.smith', 'smitha', 'winston'];
+	magicNumber = -4;
         tuesday = nearestTuesday();
-        name = people[tuesday.weeksSinceWinston % people.length];
+        name = people[(tuesday.weeksSinceWinston % people.length) + magicNumber];
         if (tuesday.daysTilDonuts == 0) {
             bot.reply(message, '@' + name + ' is supposed to bring donuts today!');
         } else {
