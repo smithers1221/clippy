@@ -20,10 +20,10 @@ module.exports = function(controller) {
             T.get('statuses/user_timeline', { count:30, since_id: moment().format("YYYY-MM-DD"), trim_user: true, exclude_replies: true, user_id: 2295568387 }, function(err, data, response) {
                 var found = false;
                 for (var i = 0; i < data.length; i++) {
-                    if ((data[i].text.indexOf('@bLAckwelder_LA') != -1) && (data[i].text.indexOf(moment().format('ddd').toUpperCase()) != -1)) {
+                    if ((data[i].text.toLowerCase().indexOf('@blackwelder_la') != -1) && (data[i].text.indexOf(moment().format('ddd').toUpperCase()) != -1)) {
                         bot.reply(message, 'Hello, today\'s food truck tweet is: ' + data[i].text);
                         found = true;
-                    } else if ((data[i].text.indexOf('@bLAckwelder_LA') != -1) && (data[i].text.indexOf('2DAY') != -1)) {
+                    } else if ((data[i].text.toLowerCase().indexOf('@blackwelder_la') != -1) && (data[i].text.indexOf('2DAY') != -1)) {
                         bot.reply(message, 'Hello, today\'s food truck tweet is: ' + data[i].text);
                         found = true;
                     }
